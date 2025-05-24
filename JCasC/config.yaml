@@ -1,0 +1,41 @@
+jenkins:
+  systemMessage: "Welcome on ARTHEMIS, the Jenkins server of the Automated Review & Testing Engine for Modular Integration on Software."
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "heathcliff"
+          name: "Heathcliff"
+          password: "${ADMIN}"
+  authorizationStrategy:
+    roleBased:
+      roles:
+        global:
+          - name: "Sentinel"
+            description: "Supervises and manages the entire system."
+            permissions:
+              - "Overall/Administer"
+              - "Overall/Read"
+            entries:
+              - user: "heathcliff"
+          - name: "Architect"
+            description: "Design and write automated tests."
+            permissions:
+              - "Job/Build"
+              - "Job/Workspace"
+              - "Job/Create"
+              - "Job/Configure"
+              - "Job/Delete"
+              - "Job/Move"
+              - "Job/Cancel"
+              - "Job/Read"
+              - "Job/Discover"
+              - "Overall/Read"
+          - name: "Voyager"
+            description: "Submits its code for execution and validation."
+            permissions:
+              - "Job/Read"
+              - "Job/Workspace"
+              - "Job/Discover"
+              - "Job/Build"
+              - "Overall/Read"
