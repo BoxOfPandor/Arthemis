@@ -23,6 +23,7 @@ pipeline {
         booleanParam(name: 'RUN_TESTS', defaultValue: true, description: 'Exécuter le pipeline de tests')
         booleanParam(name: 'RUN_CODING_STYLE', defaultValue: true, description: 'Exécuter le pipeline de vérification du style de code')
         booleanParam(name: 'RUN_DOCUMENTATION_CHECK', defaultValue: true, description: 'Vérifier la présence de documentation')
+        booleanParam(name: 'GENERATE_DOXYGEN', defaultValue: false, description: 'Générer la documentation Doxygen')
     }
 
     environment {
@@ -111,6 +112,22 @@ pipeline {
                     deleteDir()
                 }
             }
+        }
+
+        stage('Génération de documentation Doxygen') {
+            when {
+                expression { return params.GENERATE_DOXYGEN }
+            }
+            steps {
+                echo "📚 Démarrage du pipeline de génération de documentation Doxygen"
+                build job: 'Plazza_Doxygen', parameters: [
+                    string(name: 'REPO_PATH', value: "${params.REPO_PATH}"),
+                    string(name: 'BRANCH', value: "${params.BRANCH}"),
+                    string(name: 'PROJECT_NAME', value: "Plazza"),
+                    string(name: 'PROJECT_VERSION', value: "1.0"),
+                    string(name: 'OUTPUT_DIRECTORY', value: "doxygen-docs")
+                ]
+                echo "✅ Pipeline de génération de documentation Doxygen terminé avec succès"
             }
         }
     }
@@ -126,6 +143,7 @@ pipeline {
             if (params.RUN_TESTS) { echo "  ✓ Tests" }
             if (params.RUN_CODING_STYLE) { echo "  ✓ Vérification du style de code" }
             if (params.RUN_DOCUMENTATION_CHECK) { echo "  ✓ Vérification de la documentation" }
+            if (params.GENERATE_DOXYGEN) { echo "  ✓ Génération de documentation Doxygen" }
         }
         failure {
             echo "❌ Le pipeline CI orchestrateur pour le projet Plazza a échoué"
