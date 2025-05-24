@@ -1,3 +1,18 @@
+/*
+ * ========================================================================
+ * Plazza_Tests.groovy
+ * ========================================================================
+ * Purpose:      Jenkins pipeline script for testing the Plazza project
+ * Description:  This script checks out the repository, builds the project,
+ *               runs functional tests, checks for memory leaks, and cleans up
+ * Author:       Heathcliff - Arthemis Team
+ * Created:      May 24, 2025
+ * Updated:      May 24, 2025
+ * Version:      1.0
+ * Repository:   Arthemis/Pipeline/Plazza
+ * ========================================================================
+ */
+
 pipeline {
     agent any
 

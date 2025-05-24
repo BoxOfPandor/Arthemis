@@ -1,3 +1,18 @@
+/*
+ * ========================================================================
+ * Plazza_CodingStyle.groovy
+ * ========================================================================
+ * Purpose:      Jenkins pipeline script for checking coding style in the Plazza project
+ * Description:  This script checks out the repository, runs style checkers
+ *               (clang-format) and static analysis (cppcheck) on the codebase
+ * Author:       Heathcliff - Arthemis Team
+ * Created:      May 24, 2025
+ * Updated:      May 24, 2025
+ * Version:      1.0
+ * Repository:   Arthemis/Pipeline/Plazza
+ * ========================================================================
+ */
+
 pipeline {
     agent any
 

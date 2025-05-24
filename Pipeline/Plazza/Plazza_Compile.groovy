@@ -1,3 +1,18 @@
+/*
+ * ========================================================================
+ * Plazza_Compile.groovy
+ * ========================================================================
+ * Purpose:      Jenkins pipeline script for compiling the Plazza project
+ * Description:  This script checks out the repository, builds the project in a
+ *               Docker container, verifies the binary exists, and cleans up
+ * Author:       Heathcliff - Arthemis Team
+ * Created:      May 24, 2025
+ * Updated:      May 24, 2025
+ * Version:      1.0
+ * Repository:   Arthemis/Pipeline/Plazza
+ * ========================================================================
+ */
+
 pipeline {
     agent any
 

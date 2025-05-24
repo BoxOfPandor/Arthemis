@@ -1,3 +1,19 @@
+/*
+ * ========================================================================
+ * Plazza_CI.groovy
+ * ========================================================================
+ * Purpose:      Jenkins pipeline script for complete CI process of the Plazza project
+ * Description:  This script performs a comprehensive CI workflow including:
+ *               code style checking, static analysis, compilation, functional testing,
+ *               memory leak detection, and documentation validation
+ * Author:       Heathcliff - Arthemis Team
+ * Created:      May 24, 2025
+ * Updated:      May 24, 2025
+ * Version:      1.0
+ * Repository:   Arthemis/Pipeline/Plazza
+ * ========================================================================
+ */
+
 pipeline {
     agent any
 
