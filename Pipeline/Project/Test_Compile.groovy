@@ -55,9 +55,21 @@ pipeline {
 
         stage('Check Binary') {
             steps {
-                sh '''
-                    docker exec ${CONTAINER_NAME} bash -c 'if [ ! -f ${EXPECTED_BINARY} ]; then echo "❌ Binaire ${EXPECTED_BINARY} introuvable"; exit 1; fi'
-                '''
+                script {
+                    def binaryExists = sh(
+                        script: """
+                            docker exec ${CONTAINER_NAME} bash -c 'if [ -f "${EXPECTED_BINARY}" ]; then echo "true"; else echo "false"; fi'
+                        """,
+                        returnStdout: true
+                    ).trim()
+
+                    if (binaryExists == "false") {
+                        echo "❌ Binaire ${EXPECTED_BINARY} introuvable dans le conteneur"
+                        error "Échec: Le binaire ${EXPECTED_BINARY} n'existe pas après la compilation"
+                    } else {
+                        echo "✅ Binaire ${EXPECTED_BINARY} trouvé avec succès"
+                    }
+                }
             }
         }
 
